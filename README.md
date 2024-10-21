@@ -70,27 +70,44 @@ cd ismp
 
 Open the `Cargo.toml` file in your project and update the dependencies:
 
+### Updating Cargo.toml for ISMP Pallet
+
+#### Core Configuration
 ```toml
 [package]
 name = "pallet-ismp"
 version = "0.1.0"
 authors = ["[Your Name] <[your_email@example.com]>"]
 edition = "2021"
+```
 
+#### Primary Dependencies
+```toml
 [dependencies]
 ink = { version = "4.3", default-features = false }
 scale = { package = "parity-scale-codec", version = "3", default-features = false, features = ["derive"] }
 scale-info = { version = "2.9", default-features = false, features = ["derive"], optional = true }
+
+# Substrate Dependencies
 frame-support = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
 frame-system = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
 sp-std = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+```
 
+#### Development Dependencies
+```toml
 [dev-dependencies]
 ink_e2e = "4.3"
+```
 
+#### Library Configuration
+```toml
 [lib]
 path = "src/lib.rs"
+```
 
+#### Feature Flags
+```toml
 [features]
 default = ["std"]
 std = [
@@ -103,6 +120,27 @@ std = [
 ]
 ink-as-dependency = []
 ```
+
+#### Dependency Breakdown
+
+##### Essential Components
+- `ink`: Smart contract framework
+- `scale`: Encoding/decoding library (SCALE codec)
+- `scale-info`: Type information for SCALE
+- `frame-support`: Core Substrate functionality
+- `frame-system`: System-level operations
+- `sp-std`: Standard library features
+
+##### Features Configuration
+- `default`: Enables standard library features
+- `std`: Specific standard library implementations
+- `ink-as-dependency`: For using as dependency in other projects
+
+##### Key Points
+1. Using git dependencies for Substrate components
+2. All dependencies configured for no-std compatibility
+3. Features organized for both native and WebAssembly compilation
+4. Development tools included for testing
 
 ## 🧑‍💻 Step 3: Implement ISMP Pallet Logic
 
